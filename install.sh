@@ -20,29 +20,33 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-# Helper functions
+# print_info prints an informational message to stdout prefixed with a blue "ℹ" symbol and accepts a single message string.
 print_info() {
     echo -e "${BLUE}ℹ${NC} $1"
 }
 
+# print_success prints a green checkmark followed by the provided message to stdout.
 print_success() {
     echo -e "${GREEN}✓${NC} $1"
 }
 
+# print_warning prints a coloured yellow warning message prefixed with a warning icon.
 print_warning() {
     echo -e "${YELLOW}⚠${NC} $1"
 }
 
+# print_error prints an error message prefixed with a red "✗" and resets terminal colour.
 print_error() {
     echo -e "${RED}✗${NC} $1"
 }
 
-# Check if command exists
+# command_exists checks whether the given command is available in PATH.
+# It exits with status 0 if the command is found, non-zero otherwise.
 command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
-# Main installation
+# main installs Oh My Zsh, Powerlevel10k and common Zsh plugins, backs up existing .zshrc/.p10k.zsh, deploys dotfiles from the repository to the user’s home, and provides prerequisite checks and post‑install guidance.
 main() {
     echo ""
     echo "======================================"
