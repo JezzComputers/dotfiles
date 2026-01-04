@@ -159,11 +159,11 @@ main() {
     echo ""
     
     # Check if Zsh is the default shell
-    if [ "$SHELL" != "$(which zsh)" ]; then
+    if [ "$SHELL" != "$(command -v zsh)" ]; then
         print_warning "Zsh is not your default shell yet."
         echo ""
         echo "To set Zsh as your default shell, run:"
-        echo "  chsh -s \$(which zsh)"
+        echo "  chsh -s \$(command -v zsh)"
         echo ""
     fi
 

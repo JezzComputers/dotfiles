@@ -239,7 +239,7 @@ chmod 644 ~/.zshrc ~/.p10k.zsh
 If Zsh isn't already your default shell, set it:
 
 ```bash
-chsh -s $(which zsh)
+chsh -s $(command -v zsh)
 ```
 
 You'll be prompted to enter your password.
