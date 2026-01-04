@@ -84,37 +84,193 @@ For the best experience, install a Nerd Font or Powerline font:
 # https://github.com/romkatv/powerlevel10k#manual-font-installation
 ```
 
-## 🚀 Installation
+## 🚀 Complete Installation Guide
 
-### Step 1: Clone this repository
+### Quick Installation (Recommended)
+
+The easiest way to install everything is using the provided installation script:
+
 ```bash
+# Clone the repository
 git clone https://github.com/JezzComputers/dotfiles.git
 cd dotfiles
+
+# Run the installation script
+chmod +x install.sh
+./install.sh
 ```
 
-### Step 2: Backup existing configurations
+The script will automatically:
+- ✅ Check prerequisites
+- ✅ Install Oh My Zsh
+- ✅ Install Powerlevel10k theme
+- ✅ Install required plugins (syntax highlighting, autosuggestions)
+- ✅ Backup your existing configurations
+- ✅ Install the dotfiles
+
+After running the script, just restart your terminal or run `exec zsh`.
+
+---
+
+### Manual Installation (Step-by-Step)
+
+If you prefer to install everything manually, follow these steps in order:
+
+### Step 1: Install Zsh
+
+First, install Zsh if you don't have it already:
+
 ```bash
-# Backup your current .zshrc and .p10k.zsh if they exist
-mv ~/.zshrc ~/.zshrc.backup 2>/dev/null || true
-mv ~/.p10k.zsh ~/.p10k.zsh.backup 2>/dev/null || true
+# Ubuntu/Debian
+sudo apt update
+sudo apt install zsh -y
+
+# macOS (usually pre-installed, but you can update it)
+brew install zsh
+
+# Fedora/RHEL
+sudo dnf install zsh -y
+
+# Arch Linux
+sudo pacman -S zsh
 ```
 
-### Step 3: Copy configuration files
+Verify installation:
 ```bash
-# Copy the configuration files to your home directory
+zsh --version
+```
+
+### Step 2: Install Oh My Zsh
+
+Install Oh My Zsh framework:
+
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+**Alternative if you don't have `curl`:**
+```bash
+sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+This will:
+- Install Oh My Zsh to `~/.oh-my-zsh`
+- Back up your existing `~/.zshrc` file
+- Create a new default `~/.zshrc`
+- Set Zsh as your default shell (will prompt for password)
+
+### Step 3: Install Powerlevel10k Theme
+
+Clone Powerlevel10k into your Oh My Zsh themes directory:
+
+```bash
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+```
+
+### Step 4: Install Zsh Plugins
+
+Install the required plugins for syntax highlighting and autosuggestions:
+
+**Zsh Syntax Highlighting:**
+```bash
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+```
+
+**Zsh Autosuggestions:**
+```bash
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+```
+
+### Step 5: Install Recommended Fonts
+
+For the best visual experience, install the recommended fonts:
+
+**Option A: Automatic Installation (Recommended)**
+The Powerlevel10k configuration wizard will prompt you to install fonts automatically.
+
+**Option B: Manual Installation**
+
+Download and install the MesloLGS NF fonts manually:
+
+```bash
+# Create fonts directory if it doesn't exist
+mkdir -p ~/.local/share/fonts
+
+# Download the fonts
+cd ~/.local/share/fonts
+curl -fLo "MesloLGS NF Regular.ttf" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
+curl -fLo "MesloLGS NF Bold.ttf" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
+curl -fLo "MesloLGS NF Italic.ttf" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
+curl -fLo "MesloLGS NF Bold Italic.ttf" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
+
+# Refresh font cache
+fc-cache -fv
+```
+
+**Configure your terminal to use the font:**
+- **GNOME Terminal / Ubuntu**: Edit → Preferences → Profile → Text → Font → Select "MesloLGS NF"
+- **iTerm2 (macOS)**: Preferences → Profiles → Text → Font → Select "MesloLGS NF"
+- **Windows Terminal**: Settings → Profiles → Appearance → Font face → Select "MesloLGS NF"
+- **VS Code**: Settings → Terminal → Font Family → Add `'MesloLGS NF'`
+
+### Step 6: Clone and Install This Dotfiles Configuration
+
+Now clone this repository and apply the configuration:
+
+```bash
+# Clone the repository
+git clone https://github.com/JezzComputers/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+
+# Backup your current configurations (if they exist)
+mv ~/.zshrc ~/.zshrc.backup.$(date +%Y%m%d_%H%M%S) 2>/dev/null || true
+mv ~/.p10k.zsh ~/.p10k.zsh.backup.$(date +%Y%m%d_%H%M%S) 2>/dev/null || true
+
+# Copy the dotfiles to your home directory
 cp .zshrc ~/.zshrc
 cp .p10k.zsh ~/.p10k.zsh
+
+# Make sure the files have proper permissions
+chmod 644 ~/.zshrc ~/.p10k.zsh
 ```
 
-### Step 4: Set Zsh as default shell
+### Step 7: Set Zsh as Your Default Shell
+
+If Zsh isn't already your default shell, set it:
+
 ```bash
 chsh -s $(which zsh)
 ```
 
-### Step 5: Restart your terminal
-Close and reopen your terminal or run:
+You'll be prompted to enter your password.
+
+### Step 8: Apply the Configuration
+
+Restart your terminal or reload the configuration:
+
 ```bash
-source ~/.zshrc
+# Close and reopen your terminal
+# OR
+# Source the configuration
+exec zsh
+```
+
+### Step 9: Verify Installation
+
+After reloading, you should see:
+1. The Powerlevel10k instant prompt
+2. A colorful two-line prompt
+3. Git information if you're in a git repository
+4. Syntax highlighting as you type
+5. Auto-suggestions based on your history (start typing to see them)
+
+Test the plugins:
+```bash
+# Type a git command - should see syntax highlighting in green
+git status
+
+# Type a command you've used before - should see gray auto-suggestion
+# Press → (right arrow) to accept the suggestion
 ```
 
 ## ⚙️ Configuration Details
@@ -236,46 +392,85 @@ for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6
 
 ## 📸 Examples
 
-### Prompt Appearance
+### Basic Prompt Appearance
 
-The prompt displays a two-line layout:
+The prompt displays a two-line layout with information spread across the terminal:
 
-**Line 1** shows:
 ```
-~/projects/dotfiles main ✓
+┌─────────────────────────────────────────────────────────────────────────┐
+│                                                                         │
+│  ~/projects/dotfiles  main ✓                           ✓ 2s          │
+│  ❯                                                                      │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
 ```
-- Current directory with shortened path
-- Git branch name
-- Git status indicator (✓ for clean, with markers for changes)
 
-**Line 2** shows:
-```
-❯
-```
-- Prompt character that changes color:
-  - Green: Last command succeeded
-  - Red: Last command failed
+**Features shown:**
+- **Directory**: `~/projects/dotfiles` (with path shortening)
+- **Git branch**: `main` (displayed in color)
+- **Git status**: `✓` (clean working directory)
+- **Command exit status**: `✓` (previous command succeeded)
+- **Execution time**: `2s` (time the last command took)
+- **Prompt character**: `❯` (green = success, red = failure)
 
-### With Active Development Environment
+### With Python Virtual Environment
+
 When working in a Python virtual environment:
+
 ```
-~/projects/myapp main ✓ 🐍 3.11.0 (venv)
-❯
+┌─────────────────────────────────────────────────────────────────────────┐
+│                                                                         │
+│  ~/dev/my-app  main ✓                      🐍 3.11.0 (venv)          │
+│  ❯ python manage.py runserver                                          │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
 ```
 
-### After Command Execution
-With execution time and exit status:
+**Additional feature:**
+- **Python indicator**: `🐍 3.11.0 (venv)` shows active virtual environment and version
+
+### With Git Changes and Background Job
+
+When you have uncommitted changes and background processes:
+
 ```
-~/projects/dotfiles main ✓                                    ✓ 2s
-❯
+┌─────────────────────────────────────────────────────────────────────────┐
+│                                                                         │
+│  ~/projects/dotfiles  main ✗                              ⚙ 1        │
+│  ❯                                                                      │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
 ```
 
-### With Background Jobs
-When running background processes:
+**Additional features:**
+- **Git status**: `✗` (uncommitted changes in working directory)
+- **Background jobs**: `⚙ 1` (one job running in background)
+
+### After Failed Command
+
+When a command fails:
+
 ```
-~/projects/dotfiles main ✓                                    ⚙ 1
-❯
+┌─────────────────────────────────────────────────────────────────────────┐
+│                                                                         │
+│  ~/projects/dotfiles  main ✓                           ✘ 1           │
+│  ❯                                                                      │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
 ```
+
+**Features shown:**
+- **Exit status**: `✘ 1` (command failed with exit code 1)
+- **Prompt character**: `❯` (displayed in red to indicate failure)
+
+### Color Scheme
+
+The Powerlevel10k rainbow theme uses vibrant colors:
+- **Directory**: Blue/Cyan background with white text
+- **Git branch**: Yellow/Orange background with black text
+- **Status indicators**: Green (✓) for success, Red (✗/✘) for errors
+- **Prompt character**: Green when previous command succeeded, Red when failed
+- **Environment indicators**: Various colors for different tools (Python, Node.js, etc.)
 
 ## 🔧 Troubleshooting
 
