@@ -1,119 +1,29 @@
 * {
   background-color: #0f1115;
   color: #cbd5e1;
-
-  border: none;
-  border-radius: 0;
-  min-height: 0;
   font-family: 'FiraCode Nerd Font';
-  font-size: 12px;
+  font-size: 15px;
 }
 
-.modules-left {
-  margin-left: 8px;
-}
-
-.modules-right {
-  margin-right: 6px;
-}
-
-/* Prevent the Arch launcher glyph from being clipped */
 #custom-arch {
-  padding: 0 8px 0 10px;
-}
-
-#custom-arch label {
-  padding: 0;
-  padding-top: 1px;
-  padding-bottom: 1px;
+  padding: 0 10px;
 }
 
 #workspaces button {
   all: initial;
-  padding: 0 6px;
-  margin: 0 1.5px;
-  min-width: 9px;
+  padding: 0 8px;
 }
 
 #workspaces button.empty {
   opacity: 0.5;
 }
 
-#cpu,
-#battery,
-#wireplumber,
-#custom-update {
-  min-width: 12px;
-}
-
-/* Use left-only gaps between right-side modules to avoid double spacing */
-#bluetooth {
-  margin: 0;
-}
-
-#network,
-#wireplumber,
-#cpu,
-#custom-battery,
+#custom-expand-icon,
 #tray,
-#custom-expand-icon {
-  margin: 0;
-  margin-left: 10px;
-}
-
-/* Nudge the tray chevron slightly left to match visual spacing */
-#custom-expand-icon {
-  margin-right: 6px;
-}
-
-/* Consistent padding for right-side icon modules */
 #bluetooth,
 #network,
 #wireplumber,
 #cpu,
-#tray,
-#custom-expand-icon {
-  padding-left: 0px;
-  padding-right: 5px;
-}
-
-tooltip {
-  padding: 2px;
-}
-
-#custom-update {
-  font-size: 10px;
-}
-
-#clock {
-  margin-left: 10px;
-}
-
-.hidden {
-  opacity: 0;
-}
-
-/* Hide the update module completely when it sets the hidden class
-   (keeps other uses of .hidden using opacity unchanged)
-   This removes its layout space so the bar doesn't reserve room.
-   Targeting #custom-update.hidden keeps change minimal and scoped.
-   Note: Waybar sets class attribute based on JSON "class" field.
-   The module id for custom/update is `custom-update` so use #custom-update.
-   Use display:none to remove from layout when hidden.
-
-   Example: JSON -> {"class":"hidden"} will trigger this rule.
-
-   Keep font-size/margins handled elsewhere.
-
-   Scoped rule:
-
-   Hide the update module entirely when it has class hidden
-*/
-
-#custom-update.hidden {
-  opacity: 0;
-  margin: 0;
-  padding: 0;
-  min-width: 0;
-  font-size: 0;
+#custom-battery {
+  padding-right: 10px;
 }
