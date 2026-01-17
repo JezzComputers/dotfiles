@@ -104,7 +104,7 @@ Now clone this repository and apply the configuration:
 
 ```bash
 # Clone the repository
-git clone --depth 1 https://github.com/JezzComputers/dotfiles.git
+git clone --depth 1 https://github.com/jezza5400/dotfiles.git
 cd ~/dotfiles
 
 # Back up your current configurations (if they exist)
