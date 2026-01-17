@@ -1,14 +1,19 @@
 /*****----- Configuration -----*****/
 configuration {
-	modi:                       "drun,run,filebrowser,calc,window";
+    modi: "drun,filebrowser,calc,window,emoji:rofimoji,clipboard:~/.config/rofi/cliphist.sh";
     show-icons:                 true;
     display-drun:               "";
-    display-run:                "";
     display-filebrowser:        "";
     display-calc:               "";
     display-window:             "";
+    display-emoji:              "";
+    display-clipboard:          "󱉫";
 	drun-display-format:        "{name}";
 	window-format:              "{w} · {c} · {t}";
+    kb-element-next: "";
+    kb-element-prev: "";
+    kb-mode-next: "Tab";
+    kb-mode-previous: "Shift+Tab";
 }
 
 /*****----- Global Properties -----*****/
@@ -21,7 +26,7 @@ configuration {
     active:         #98C379FF;
     urgent:         #FB4934FF;
 
-    font: "FiraCode Nerd Font 10";
+    font: "FiraCode Nerd Font 10, Noto Color Emoji 10";
 
     border-colour:               var(selected);
     handle-colour:               var(selected);
